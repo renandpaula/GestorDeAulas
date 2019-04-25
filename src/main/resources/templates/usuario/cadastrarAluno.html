@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta charset="UTF-8">
+<title>Gestor de Aulas</title>
+</head>
+<body>
+	<h1>Cadastro de Alunos:</h1>
+	<form method="post">
+	<table>
+	
+	<tr>
+	<td><label>Nome:</label></td>
+	<td><input type="text" value="" size="40" maxlength="30" name="nome" id="alunoNome"/></td>
+	</tr>
+	
+	<tr>
+	<td><label>Sobrenome:</label></td>
+	<td><input type="text" value="" size="40" maxlength="30" name="sobrenome" id="alunoSobrenome"/></td>
+	</tr>
+	
+	<tr>
+	<td><label>Endereço:</label></td>
+	<td><input type="text" value="" size="40" maxlength="100" name="endereco" id="alunoEndereco"/></td>
+	</tr>
+	
+	<tr>
+	<td><label>CPF:</label></td>
+	<td><input type="text" value="" size="40" maxlength="11" name="cpf" id="alunoCPF"/></td>
+	</tr>
+	
+	<tr>
+	<td><label>E-mail:</label></td>
+	<td><input type="email" value="" size="40" maxlength="30" name="email" id="alunoEmail"/></td>
+	</tr>
+	
+	<tr>
+	<td><label>Matrícula:</label></td>
+	<td><input type="text" value="" size="40" maxlength="10" name="matricula" id="alunoMatricula"/></td> 
+	</tr>
+	
+	<tr>
+	<td><label>Data de Nascimento:</label></td>
+	<td><input type="date" value="" name="datanascimento" id="alunoNascimento"/></td>
+	</tr>
+	
+	<tr>
+	<td colspan='2'>
+	<button type="submit">Cadastrar</button> 
+	<button type="reset">Limpar</button> 
+	</td>
+	</tr>
+	</table> 
+	</form>
+
+</body>
+</html>
