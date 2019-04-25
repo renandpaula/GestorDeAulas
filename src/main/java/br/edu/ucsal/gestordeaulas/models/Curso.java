@@ -25,6 +25,7 @@ public class Curso implements Serializable {
 	private long idCurso;
 	@OneToMany(targetEntity=Campus.class, mappedBy="listaCursosCampus", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Campus> listaCampusCurso = new ArrayList<Campus>();
+	@OneToMany(targetEntity=Disciplina.class, mappedBy="listaCursosDisciplina", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Disciplina> listaDisciplinasCurso = new ArrayList<Disciplina>();
 	@OneToMany(targetEntity=Aluno.class, mappedBy="cursoAluno", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Aluno> listaAlunosCurso = new ArrayList<Aluno>();

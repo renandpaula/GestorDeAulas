@@ -25,7 +25,11 @@ public class Disciplina implements Serializable{
 	
 	@ManyToOne(targetEntity=Professor.class, fetch=FetchType.LAZY)
 	private Professor professorDisciplina;
+	@OneToMany(targetEntity=Curso.class, fetch=FetchType.LAZY)
 	private List<Curso> listaCursosDisciplina = new ArrayList<Curso>();
+	@OneToMany(targetEntity=Disciplina.class, mappedBy="listaDisciplinasCampus", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private List<Campus> listaCampusDisciplina = new ArrayList<Campus>();
+	
 	private List<Turma> listaTurmasDisciplina = new ArrayList<Turma>();
 	@OneToMany(targetEntity=Assunto.class, mappedBy="disciplinaAssunto", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Assunto> listaAssuntosDisciplina = new ArrayList<Assunto>();
@@ -33,12 +37,13 @@ public class Disciplina implements Serializable{
 	private String diaDaSemanaDisciplina;
 	private String horarioDisciplina;
 	
-	public Disciplina(Professor professorDisciplina, List<Curso> listaCursosDisciplina,
+	public Disciplina(Professor professorDisciplina, List<Curso> listaCursosDisciplina, List<Campus> listaCampusDisciplina,
 			List<Turma> listaTurmasDisciplina, List<Assunto> listaAssuntosDisciplina, int cargaHorariaDisciplina,
 			String diaDaSemanaDisciplina, String horarioDisciplina) {
 		super();
 		this.professorDisciplina = professorDisciplina;
 		this.listaCursosDisciplina = listaCursosDisciplina;
+		this.listaCampusDisciplina = listaCampusDisciplina;
 		this.listaTurmasDisciplina = listaTurmasDisciplina;
 		this.listaAssuntosDisciplina = listaAssuntosDisciplina;
 		this.cargaHorariaDisciplina = cargaHorariaDisciplina;
@@ -54,6 +59,13 @@ public class Disciplina implements Serializable{
 		this.cargaHorariaDisciplina = cargaHorariaDisciplina;
 	}
 	
+	public List<Campus> getListaCampusDisciplina() {
+		return listaCampusDisciplina;
+	}
+
+	public void setListaCampusDisciplina(List<Campus> listaCampusDisciplina) {
+		this.listaCampusDisciplina = listaCampusDisciplina;
+	}
 
 	public long getIdDisciplina() {
 		return idDisciplina;

@@ -21,8 +21,11 @@ public class Campus extends Instituicao {
 	private List<Professor> listaProfessoresCampus = new ArrayList<Professor>();
 	@OneToMany(targetEntity=Aluno.class, fetch=FetchType.EAGER)
 	private List<Aluno> listaAlunosCampus = new ArrayList<Aluno>();
+	@OneToMany(targetEntity=Disciplina.class, fetch=FetchType.EAGER)
 	private List<Disciplina> listaDisciplinasCampus = new ArrayList<Disciplina>();
+	@OneToMany(targetEntity=Sala.class, fetch=FetchType.EAGER)
 	private List<Sala> listaSalasCampus = new ArrayList<Sala>();
+	@OneToMany(targetEntity=CalendarioAcademico.class, mappedBy="campusCalendario", fetch=FetchType.EAGER)
 	private CalendarioAcademico calendarioAcademico;
 	
 	public Campus(String nome, long cnpj, String endereco, int telefone) {
