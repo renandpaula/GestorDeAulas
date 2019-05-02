@@ -22,7 +22,7 @@ public class Disciplina implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long idDisciplina;
+	private Long idDisciplina;
 	
 	@ManyToOne
 	@JoinColumn(name="professorDisciplina", nullable=false)
@@ -73,11 +73,11 @@ public class Disciplina implements Serializable{
 		this.campusDisciplina = campusDisciplina;
 	}
 
-	public long getIdDisciplina() {
+	public Long getIdDisciplina() {
 		return idDisciplina;
 	}
 
-	public void setIdDisciplina(long idDisciplina) {
+	public void setIdDisciplina(Long idDisciplina) {
 		this.idDisciplina = idDisciplina;
 	}
 

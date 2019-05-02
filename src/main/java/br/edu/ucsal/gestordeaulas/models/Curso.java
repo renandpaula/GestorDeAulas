@@ -26,7 +26,7 @@ public class Curso implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long idCurso;
+	private Long idCurso;
 	
 	@ManyToOne
 	@JoinColumn(name="campusCurso", nullable=false)
@@ -59,6 +59,10 @@ public class Curso implements Serializable {
 	public Curso(String nomeCurso, String idCurso) {
 		super();
 		this.nomeCurso = nomeCurso;
+	}
+	
+	public Curso() {
+		
 	}
 
 	public Campus getCampusCurso() {
@@ -113,11 +117,11 @@ public class Curso implements Serializable {
 		this.nomeCurso = nomeCurso;
 	}
 
-	public long getIdCurso() {
+	public Long getIdCurso() {
 		return idCurso;
 	}
 
-	public void setIdCurso(long idCurso) {
+	public void setIdCurso(Long idCurso) {
 		this.idCurso = idCurso;
 	}
 	

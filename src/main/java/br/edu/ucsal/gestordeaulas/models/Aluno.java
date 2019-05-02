@@ -1,7 +1,6 @@
 package br.edu.ucsal.gestordeaulas.models;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,7 +17,7 @@ public class Aluno extends Usuario {
 	
 	private static final long serialVersionUID = -3302989573699184657L;
 	@ManyToOne
-	@JoinColumn(name="cursoAluno", nullable=false) 
+	@JoinColumn(name="cursoAluno", nullable=true) 
 	private Curso cursoAluno;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
@@ -30,13 +29,15 @@ public class Aluno extends Usuario {
 	@OneToMany(mappedBy="alunoAvaliacao", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
 	private List<Avaliacao> listaAvaliacoesAluno = new ArrayList<Avaliacao>();
 	
-	@ManyToMany(mappedBy="listaAlunosCampus", cascade=CascadeType.ALL)
+	@ManyToMany(mappedBy="listaAlunosCampus", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Campus> listaCampusAluno = new ArrayList<Campus>();
 	
-	public Aluno(String nome, String sobrenome, String endereco, String cpf, Date data,
+	public Aluno(String nome, String sobrenome, String endereco, String cpf, String data,
 			String email) {
 		super(nome, sobrenome, endereco, cpf, data, email);
 	}
+	
+	
 	
 	public Curso getCurso() {
 		return cursoAluno;

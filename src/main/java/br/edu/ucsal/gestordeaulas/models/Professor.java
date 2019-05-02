@@ -1,7 +1,6 @@
 package br.edu.ucsal.gestordeaulas.models;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -28,7 +27,7 @@ public class Professor extends Usuario {
 	private List<Curso> listaCursosProfessor = new ArrayList<Curso>();
 	
 
-	public Professor(String nome, String sobrenome, String endereco, String cpf, Date data,
+	public Professor(String nome, String sobrenome, String endereco, String cpf, String data,
 			String email) {
 		super(nome, sobrenome, endereco, cpf, data, email);
 	}

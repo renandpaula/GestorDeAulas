@@ -1,15 +1,12 @@
 package br.edu.ucsal.gestordeaulas.models;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Usuario implements Serializable{
@@ -18,7 +15,8 @@ public class Usuario implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long idUsuario;
+	@Column(name = "matricula")
+	private Long idUsuario;
 	
 	@Column(length=20, nullable=false)
 	private String nome;
@@ -28,16 +26,11 @@ public class Usuario implements Serializable{
 	private String endereco;
 	@Column(length=11, nullable=false)
 	private String cpf;
-	@Temporal(TemporalType.DATE)
-	private Date data;
+	private String data;
 	@Column(length=50)
 	private String email;
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long matricula;
 	
-	
-	
-	public Usuario(String nome, String sobrenome, String endereco, String cpf, Date data,
+	public Usuario(String nome, String sobrenome, String endereco, String cpf, String data,
 			String email) {
 		super();
 		this.nome = nome;
@@ -48,11 +41,11 @@ public class Usuario implements Serializable{
 		this.email = email;
 	}
 	
-	public long getId() {
+	public Long getMatricula() {
 		return idUsuario;
 	}
 
-	public void setId(long idUsuario) {
+	public void setMatricula(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
@@ -80,10 +73,10 @@ public class Usuario implements Serializable{
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 	public String getEmail() {
@@ -91,9 +84,6 @@ public class Usuario implements Serializable{
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public long getMatricula() {
-		return matricula;
 	}
 
 }

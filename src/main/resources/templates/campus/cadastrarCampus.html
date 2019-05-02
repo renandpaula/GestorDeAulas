@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta charset="UTF-8">
+<title>Gestor de Aulas</title>
+</head>
+<body>
+	<h1>Cadastro de Campus:</h1>
+	<form method="post">
+	<table>
+	
+	<tr>
+	<td><label>Nome:</label></td>
+	<td><input type="text" value="" size="40" maxlength="30" name="nome" id="campusNome"/></td>
+	</tr>
+	
+	<tr>
+	<td><label>Endereço:</label></td>
+	<td><input type="text" value="" size="40" maxlength="100" name="endereco" id="campusEndereco"/></td>
+	</tr>
+	
+	<tr>
+	<td><label>CNPJ:</label></td>
+	<td><input type="text" value="" size="40" maxlength="14" name="cnpj" id="campusCNPJ"/></td>
+	</tr>
+	
+	<tr>
+	<td><label>Telefone:</label></td>
+	<td><input type="text" value="" size="40" maxlength="11" name="telefone" id="campusTelefone"/></td>
+	</tr>
+	
+	<tr>
+	<td colspan='2'>
+	<button type="submit">Cadastrar</button> 
+	<button type="reset">Limpar</button> 
+	</td>
+	</tr>
+	</table> 
+	</form>
+
+</body>
+</html>

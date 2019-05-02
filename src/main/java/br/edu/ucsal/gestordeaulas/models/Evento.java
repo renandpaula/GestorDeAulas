@@ -1,7 +1,6 @@
 package br.edu.ucsal.gestordeaulas.models;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Evento implements Serializable {
@@ -20,11 +17,10 @@ public class Evento implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long idEvento;
+	private Long idEvento;
 	
 	private String nomeEvento;
-	@Temporal(TemporalType.DATE)
-	private Date dataEvento;
+	private String dataEvento;
 	private String horarioEvento;
 	
 	@Column(nullable=false)
@@ -37,7 +33,7 @@ public class Evento implements Serializable {
 	private boolean diaUtilEvento;
 	private boolean feriado;
 	
-	public Evento(String nomeEvento, Date dataEvento, String horarioEvento, Campus localEvento,
+	public Evento(String nomeEvento, String dataEvento, String horarioEvento, Campus localEvento,
 			CalendarioAcademico calendarioAcademico, boolean diaUtilEvento, boolean feriado) {
 		super();
 		this.nomeEvento = nomeEvento;
@@ -79,11 +75,11 @@ public class Evento implements Serializable {
 		this.localEvento = localEvento;
 	}
 
-	public long getIdEvento() {
+	public Long getIdEvento() {
 		return idEvento;
 	}
 
-	public void setIdEvento(long idEvento) {
+	public void setIdEvento(Long idEvento) {
 		this.idEvento = idEvento;
 	}
 
@@ -93,10 +89,10 @@ public class Evento implements Serializable {
 	public void setNomeEvento(String nomeEvento) {
 		this.nomeEvento = nomeEvento;
 	}
-	public Date getDataEvento() {
+	public String getDataEvento() {
 		return dataEvento;
 	}
-	public void setDataEvento(Date dataEvento) {
+	public void setDataEvento(String dataEvento) {
 		this.dataEvento = dataEvento;
 	}
 	public String getHorarioEvento() {

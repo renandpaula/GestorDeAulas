@@ -16,7 +16,7 @@ public class Assunto implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long idAssunto;
+	private Long idAssunto;
 	
 	private String nomeAssunto;
 	
@@ -30,11 +30,11 @@ public class Assunto implements Serializable{
 		this.disciplinaAssunto = disciplinaAssunto;
 	}
 	
-	public long getIdAssunto() {
+	public Long getIdAssunto() {
 		return idAssunto;
 	}
 
-	public void setIdAssunto(long idAssunto) {
+	public void setIdAssunto(Long idAssunto) {
 		this.idAssunto = idAssunto;
 	}
 

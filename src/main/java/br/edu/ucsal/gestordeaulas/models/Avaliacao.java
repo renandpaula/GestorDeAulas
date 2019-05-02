@@ -17,7 +17,7 @@ public class Avaliacao implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long idAvaliacao;
+	private Long idAvaliacao;
 	
 	@ManyToOne
 	@JoinColumn(name="alunoAvaliacao", nullable=false)
@@ -36,11 +36,11 @@ public class Avaliacao implements Serializable{
 		this.notaAvaliacao = nota;
 	}
 	
-	public long getIdAvaliacao() {
+	public Long getIdAvaliacao() {
 		return idAvaliacao;
 	}
 
-	public void setIdAvaliacao(long idAvaliacao) {
+	public void setIdAvaliacao(Long idAvaliacao) {
 		this.idAvaliacao = idAvaliacao;
 	}
 

@@ -23,7 +23,7 @@ public class Turma implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long idTurma;
+	private Long idTurma;
 	
 	@ManyToOne
 	@JoinColumn(name="salaTurma", nullable=false)
@@ -66,11 +66,11 @@ public class Turma implements Serializable{
 		
 	}
 
-	public long getIdTurma() {
+	public Long getIdTurma() {
 		return idTurma;
 	}
 
-	public void setIdTurma(long idTurma) {
+	public void setIdTurma(Long idTurma) {
 		this.idTurma = idTurma;
 	}
 

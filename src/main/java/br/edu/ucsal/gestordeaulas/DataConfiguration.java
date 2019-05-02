@@ -18,7 +18,8 @@ public class DataConfiguration {
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/gestordeaulas?useTimezone=true&serverTimezone=UTC");
         dataSource.setUsername("root");
-        dataSource.setPassword("mysql6388");
+//        dataSource.setPassword("mysql6388");
+        dataSource.setPassword("mysqlpass123");
         return dataSource;
     }
 	

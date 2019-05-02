@@ -24,7 +24,7 @@ public class Sala implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long idSala;
+	private Long idSala;
 	
 	@ManyToOne
 	@JoinColumn(name="campusSala", nullable=false)
@@ -48,11 +48,11 @@ public class Sala implements Serializable{
 		this.numeroSala = numero;
 	}
 
-	public long getIdSala() {
+	public Long getIdSala() {
 		return idSala;
 	}
 
-	public void setIdSala(long idSala) {
+	public void setIdSala(Long idSala) {
 		this.idSala = idSala;
 	}
 

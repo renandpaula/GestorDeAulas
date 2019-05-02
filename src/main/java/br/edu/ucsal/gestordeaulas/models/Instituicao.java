@@ -11,14 +11,11 @@ import javax.persistence.Id;
 @Entity
 public class Instituicao implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7236787832657432989L;
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long idInstitucao;
+	private Long idInstitucao;
 	
 	@Column(length=50, nullable=false)
 	private String nome;
@@ -37,11 +34,11 @@ public class Instituicao implements Serializable{
 		this.telefone = telefone;
 	}
 	
-	public long getIdInstitucao() {
+	public Long getIdInstitucao() {
 		return idInstitucao;
 	}
 
-	public void setIdInstitucao(long idInstitucao) {
+	public void setIdInstitucao(Long idInstitucao) {
 		this.idInstitucao = idInstitucao;
 	}
 

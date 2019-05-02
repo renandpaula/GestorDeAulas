@@ -25,7 +25,7 @@ public class CalendarioAcademico implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long idCalendario;
+	private Long idCalendario;
 	
 	
 	@OneToMany(mappedBy="calendarioAcademico", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
@@ -64,6 +64,15 @@ public class CalendarioAcademico implements Serializable {
 	
 	public Campus getCampusCalendario() {
 		return campusCalendario;
+	}
+	
+	public Long getIdCalendario() {
+		return idCalendario;
+	}
+
+
+	public void setIdCalendario(Long idCalendario) {
+		this.idCalendario = idCalendario;
 	}
 	
 	public void setCampusCalendario(Campus campusCalendario) {
