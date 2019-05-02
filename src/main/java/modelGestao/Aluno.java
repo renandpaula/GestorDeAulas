@@ -1,41 +1,20 @@
-package br.edu.ucsal.gestordeaulas.models;
+package modelGestao;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import org.joda.time.LocalDate;
 
-@Entity
 public class Aluno extends Usuario {
 	
-	private static final long serialVersionUID = -3302989573699184657L;
-	@ManyToOne
-	@JoinColumn(name="cursoAluno", nullable=false) 
 	private Curso cursoAluno;
-	
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="aluno_turma",
-				joinColumns = @JoinColumn(name = "idUsuario"),
-				inverseJoinColumns = @JoinColumn(name = "idTurma"))
 	private List<Turma> listaTurmasAluno =  new ArrayList<Turma>();
-	
-	@OneToMany(mappedBy="alunoAvaliacao", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
 	private List<Avaliacao> listaAvaliacoesAluno = new ArrayList<Avaliacao>();
-	
-	@ManyToMany(mappedBy="listaAlunosCampus", cascade=CascadeType.ALL)
 	private List<Campus> listaCampusAluno = new ArrayList<Campus>();
 	
-	public Aluno(String nome, String sobrenome, String endereco, String cpf, Date data,
-			String email) {
-		super(nome, sobrenome, endereco, cpf, data, email);
+	public Aluno(long idUsuario, String nome, String sobrenome, String endereco, String cpf, LocalDate data,
+			String email, long matricula) {
+		super(idUsuario, nome, sobrenome, endereco, cpf, data, email, matricula);
 	}
 	
 	public Curso getCurso() {

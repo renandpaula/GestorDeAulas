@@ -1,44 +1,20 @@
-package br.edu.ucsal.gestordeaulas.models;
+package modelGestao;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import org.joda.time.LocalDate;
 
-@Entity
 public class Professor extends Usuario {
-
-	private static final long serialVersionUID = -4488262980914326041L;
 	
-	@OneToMany(mappedBy="professorDisciplina", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
 	private List<Disciplina> listaDisciplinasProfessor = new ArrayList<Disciplina>();
-	
-	@OneToMany(mappedBy="professorTurma", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
 	private List<Turma> listaTurmasProfessor = new ArrayList<Turma>();
-	
-	@ManyToMany(mappedBy="listaProfessoresCampus", cascade=CascadeType.ALL)
 	private List<Campus> listaCampusProfessor =  new ArrayList<Campus>();
 	
-	@ManyToMany(mappedBy="listaProfessoresCurso", cascade=CascadeType.ALL)
-	private List<Curso> listaCursosProfessor = new ArrayList<Curso>();
-	
 
-	public Professor(String nome, String sobrenome, String endereco, String cpf, Date data,
-			String email) {
-		super(nome, sobrenome, endereco, cpf, data, email);
-	}
-
-	public List<Curso> getListaCursosProfessor() {
-		return listaCursosProfessor;
-	}
-
-	public void setListaCursosProfessor(List<Curso> listaCursosProfessor) {
-		this.listaCursosProfessor = listaCursosProfessor;
+	public Professor(long idUsuario, String nome, String sobrenome, String endereco, String cpf, LocalDate data,
+			String email, long matricula) {
+		super(idUsuario, nome, sobrenome, endereco, cpf, data, email, matricula);
 	}
 
 	public List<Disciplina> getListaDisciplinasProfessor() {

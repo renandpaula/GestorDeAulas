@@ -1,55 +1,26 @@
-package br.edu.ucsal.gestordeaulas.models;
+package modelGestao;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-@Entity
-public class Disciplina implements Serializable{
+public class Disciplina {
 	
-	private static final long serialVersionUID = -5793463018473496771L;
-	
-	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private long idDisciplina;
-	
-	@ManyToOne
-	@JoinColumn(name="professorDisciplina", nullable=false)
 	private Professor professorDisciplina;
-	
-	@ManyToOne
-	@JoinColumn(name="cursoDisciplina", nullable=false)
-	private Curso cursoDisciplina;
-	
-	@Column
-	private Campus campusDisciplina =  cursoDisciplina.getCampusCurso();
-	
-	@OneToMany(mappedBy="disciplinaTurma", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
+	private List<Curso> listaCursosDisciplina = new ArrayList<Curso>();
 	private List<Turma> listaTurmasDisciplina = new ArrayList<Turma>();
-	
-	@OneToMany(mappedBy="disciplinaAssunto", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
 	private List<Assunto> listaAssuntosDisciplina = new ArrayList<Assunto>();
-	
 	private int cargaHorariaDisciplina;
 	private String diaDaSemanaDisciplina;
 	private String horarioDisciplina;
 	
-	public Disciplina(Professor professorDisciplina, Curso cursoDisciplina, List<Turma> listaTurmasDisciplina, List<Assunto> listaAssuntosDisciplina, int cargaHorariaDisciplina,
+	
+	
+	public Disciplina(Professor professorDisciplina, List<Curso> listaCursosDisciplina,
+			List<Turma> listaTurmasDisciplina, List<Assunto> listaAssuntosDisciplina, int cargaHorariaDisciplina,
 			String diaDaSemanaDisciplina, String horarioDisciplina) {
 		super();
 		this.professorDisciplina = professorDisciplina;
-		this.cursoDisciplina = cursoDisciplina;
+		this.listaCursosDisciplina = listaCursosDisciplina;
 		this.listaTurmasDisciplina = listaTurmasDisciplina;
 		this.listaAssuntosDisciplina = listaAssuntosDisciplina;
 		this.cargaHorariaDisciplina = cargaHorariaDisciplina;
@@ -57,29 +28,17 @@ public class Disciplina implements Serializable{
 		this.horarioDisciplina = horarioDisciplina;
 	}
 	
-	public Disciplina(Curso cursoDisciplina, List<Assunto> listaAssuntosDisciplina,
+	
+
+	public Disciplina(List<Curso> listaCursosDisciplina, List<Assunto> listaAssuntosDisciplina,
 			int cargaHorariaDisciplina) {
 		super();
-		this.cursoDisciplina = cursoDisciplina;
+		this.listaCursosDisciplina = listaCursosDisciplina;
 		this.listaAssuntosDisciplina = listaAssuntosDisciplina;
 		this.cargaHorariaDisciplina = cargaHorariaDisciplina;
 	}
-	
-	public Campus getListaCampusDisciplina() {
-		return campusDisciplina;
-	}
 
-	public void setListaCampusDisciplina(Campus campusDisciplina) {
-		this.campusDisciplina = campusDisciplina;
-	}
 
-	public long getIdDisciplina() {
-		return idDisciplina;
-	}
-
-	public void setIdDisciplina(long idDisciplina) {
-		this.idDisciplina = idDisciplina;
-	}
 
 	public String getDiaDaSemanaDisciplina() {
 		return diaDaSemanaDisciplina;
@@ -105,14 +64,18 @@ public class Disciplina implements Serializable{
 		this.professorDisciplina = professorDisciplina;
 	}
 
-	public Curso getCursoDisciplina() {
-		return cursoDisciplina;
+	public List<Curso> getListaCursosDisciplina() {
+		return listaCursosDisciplina;
 	}
 
-	public void setCursoDisciplina(Curso cursoDisciplina) {
-		this.cursoDisciplina = cursoDisciplina;
+	public void setListaCursosDisciplina(List<Curso> listaCursosDisciplina) {
+		this.listaCursosDisciplina = listaCursosDisciplina;
 	}
 	
+	public void addListaCursosDisciplina(Curso curso) {
+		this.listaCursosDisciplina.add(curso);
+	}
+
 	public List<Turma> getListaTurmasDisciplina() {
 		return listaTurmasDisciplina;
 	}

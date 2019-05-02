@@ -3,18 +3,15 @@ package br.edu.ucsal.gestordeaulas.models;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Assunto implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3488417739332646233L;
 
 	@Id
@@ -22,7 +19,9 @@ public class Assunto implements Serializable{
 	private long idAssunto;
 	
 	private String nomeAssunto;
-	@ManyToOne(targetEntity=Disciplina.class, fetch=FetchType.LAZY)
+	
+	@ManyToOne
+	@JoinColumn(name="disciplinaAssunto", nullable=false)
 	private Disciplina disciplinaAssunto;
 	
 	public Assunto(String nomeAssunto, Disciplina disciplinaAssunto) {

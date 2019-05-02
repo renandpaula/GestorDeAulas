@@ -2,6 +2,7 @@ package br.edu.ucsal.gestordeaulas.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +20,17 @@ public class Instituicao implements Serializable{
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long idInstitucao;
 	
+	@Column(length=50, nullable=false)
 	private String nome;
-	private long cnpj;
+	@Column(length=14, nullable=false)
+	private String cnpj;
+	@Column(length=50, nullable=false)
 	private String endereco;
-	private int telefone;
+	@Column(length=11, nullable=false)
+	private String telefone;
 	
 	
-	public Instituicao(String nome, long cnpj, String endereco, int telefone) {
+	public Instituicao(String nome, String cnpj, String endereco, String telefone) {
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.endereco = endereco;
@@ -48,11 +53,11 @@ public class Instituicao implements Serializable{
 		this.nome = nome;
 	}
 	
-	public long getCnpj() {
+	public String getCnpj() {
 		return cnpj;
 	}
 	
-	public void setCnpj(long cnpj) {
+	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
 	
@@ -64,11 +69,11 @@ public class Instituicao implements Serializable{
 		this.endereco = endereco;
 	}
 	
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
 	
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 		
