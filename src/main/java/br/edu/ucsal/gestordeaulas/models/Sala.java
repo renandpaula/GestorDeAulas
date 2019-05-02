@@ -10,7 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Sala implements Serializable{
@@ -24,9 +26,13 @@ public class Sala implements Serializable{
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long idSala;
 	
-	@OneToOne(targetEntity=Campus.class, mappedBy="listaSalasCampus", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name="campusSala", nullable=false)
 	private Campus campusSala;
+	
 	private String numeroSala;
+	
+	@OneToMany(mappedBy="salaTurma", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
 	private List<Turma> listaTurmasSala = new ArrayList<Turma>();
 	
 	public Sala(Campus campus, String numero, List<Turma> listaTurmasSala) {

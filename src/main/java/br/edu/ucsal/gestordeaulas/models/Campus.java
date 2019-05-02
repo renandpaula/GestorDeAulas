@@ -3,32 +3,41 @@ package br.edu.ucsal.gestordeaulas.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Campus extends Instituicao {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8090960602122686439L;
 	
-	@OneToMany(targetEntity=Curso.class, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="campusCurso", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
 	private List<Curso> listaCursosCampus = new ArrayList<Curso>();
-	@OneToMany(targetEntity=Professor.class, fetch=FetchType.EAGER)
-	private List<Professor> listaProfessoresCampus = new ArrayList<Professor>();
-	@OneToMany(targetEntity=Aluno.class, fetch=FetchType.EAGER)
-	private List<Aluno> listaAlunosCampus = new ArrayList<Aluno>();
-	@OneToMany(targetEntity=Disciplina.class, fetch=FetchType.EAGER)
-	private List<Disciplina> listaDisciplinasCampus = new ArrayList<Disciplina>();
-	@OneToMany(targetEntity=Sala.class, fetch=FetchType.EAGER)
-	private List<Sala> listaSalasCampus = new ArrayList<Sala>();
-	@OneToMany(targetEntity=CalendarioAcademico.class, mappedBy="campusCalendario", fetch=FetchType.EAGER)
-	private CalendarioAcademico calendarioAcademico;
 	
-	public Campus(String nome, long cnpj, String endereco, int telefone) {
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="campus_professor",
+				joinColumns = @JoinColumn(name = "idInstitucao"),
+				inverseJoinColumns = @JoinColumn(name = "idUsuario"))
+	private List<Professor> listaProfessoresCampus = new ArrayList<Professor>();
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="campus_aluno",
+				joinColumns = @JoinColumn(name = "idInstitucao"),
+				inverseJoinColumns = @JoinColumn(name = "idUsuario"))
+	private List<Aluno> listaAlunosCampus = new ArrayList<Aluno>();
+	
+	@OneToMany(mappedBy="campusSala", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
+	private List<Sala> listaSalasCampus = new ArrayList<Sala>();
+	
+	@OneToMany(mappedBy="campusCalendario", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
+	private List<CalendarioAcademico> listaCalendarioAcademico = new ArrayList<CalendarioAcademico>();
+	
+	public Campus(String nome, String cnpj, String endereco, String telefone) {
 		super(nome, cnpj, endereco, telefone);
 	}
 
@@ -68,18 +77,6 @@ public class Campus extends Instituicao {
 		this.listaAlunosCampus.add(aluno);
 	}
 
-	public List<Disciplina> getListaDisciplinas() {
-		return listaDisciplinasCampus;
-	}
-
-	public void setListaDisciplinas(List<Disciplina> listaDisciplinas) {
-		this.listaDisciplinasCampus = listaDisciplinas;
-	}
-
-	public void addListaDisciplinas(Disciplina disciplina) {
-		this.listaDisciplinasCampus.add(disciplina);
-	}
-
 	public List<Sala> getListaSalas() {
 		return listaSalasCampus;
 	}
@@ -92,12 +89,12 @@ public class Campus extends Instituicao {
 		this.listaSalasCampus.add(sala);
 	}
 
-	public CalendarioAcademico getCalendarioAcademico() {
-		return calendarioAcademico;
+	public List<CalendarioAcademico> getCalendarioAcademico() {
+		return listaCalendarioAcademico;
 	}
 
-	public void setCalendarioAcademico(CalendarioAcademico calendarioAcademico) {
-		this.calendarioAcademico = calendarioAcademico;
+	public void setCalendarioAcademico(List<CalendarioAcademico> calendarioAcademico) {
+		this.listaCalendarioAcademico = calendarioAcademico;
 	}
 	
 	

@@ -10,6 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -23,20 +27,29 @@ public class Curso implements Serializable {
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long idCurso;
-	@OneToMany(targetEntity=Campus.class, mappedBy="listaCursosCampus", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	private List<Campus> listaCampusCurso = new ArrayList<Campus>();
-	@OneToMany(targetEntity=Disciplina.class, mappedBy="listaCursosDisciplina", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	
+	@ManyToOne
+	@JoinColumn(name="campusCurso", nullable=false)
+	private Campus campusCurso;
+	
+	@OneToMany(mappedBy="cursoDisciplina", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
 	private List<Disciplina> listaDisciplinasCurso = new ArrayList<Disciplina>();
-	@OneToMany(targetEntity=Aluno.class, mappedBy="cursoAluno", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	
+	@OneToMany(mappedBy="cursoAluno", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
 	private List<Aluno> listaAlunosCurso = new ArrayList<Aluno>();
 	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="curso_professor",
+				joinColumns = @JoinColumn(name = "idCurso"),
+				inverseJoinColumns = @JoinColumn(name = "idUsuario"))
 	private List<Professor> listaProfessoresCurso = new ArrayList<Professor>();
+	
 	private String nomeCurso;
 	
-	public Curso(List<Campus> listaCampusCurso, List<Disciplina> listaDisciplinasCurso, List<Aluno> listaAlunosCurso,
+	public Curso(Campus campusCurso, List<Disciplina> listaDisciplinasCurso, List<Aluno> listaAlunosCurso,
 			List<Professor> listaProfessoresCurso, String nomeCurso) {
 		super();
-		this.listaCampusCurso = listaCampusCurso;
+		this.campusCurso = campusCurso;
 		this.listaDisciplinasCurso = listaDisciplinasCurso;
 		this.listaAlunosCurso = listaAlunosCurso;
 		this.listaProfessoresCurso = listaProfessoresCurso;
@@ -48,18 +61,14 @@ public class Curso implements Serializable {
 		this.nomeCurso = nomeCurso;
 	}
 
-	public List<Campus> getListaCampusCurso() {
-		return listaCampusCurso;
+	public Campus getCampusCurso() {
+		return campusCurso;
 	}
 	
-	public void setListaCampusCurso(List<Campus> listaCampusCurso) {
-		this.listaCampusCurso = listaCampusCurso;
+	public void setCampusCurso(Campus campusCurso) {
+		this.campusCurso = campusCurso;
 	}
 	
-	public void addListaCampusCurso(Campus campus) {
-		this.listaCampusCurso.add(campus);
-	}
-
 	public List<Disciplina> getListaDisciplinasCurso() {
 		return listaDisciplinasCurso;
 	}

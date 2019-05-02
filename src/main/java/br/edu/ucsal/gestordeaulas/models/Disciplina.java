@@ -5,45 +5,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+@Entity
 public class Disciplina implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5793463018473496771L;
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private long idDisciplina;
 	
-	@ManyToOne(targetEntity=Professor.class, fetch=FetchType.LAZY)
+	@ManyToOne
+	@JoinColumn(name="professorDisciplina", nullable=false)
 	private Professor professorDisciplina;
-	@OneToMany(targetEntity=Curso.class, fetch=FetchType.LAZY)
-	private List<Curso> listaCursosDisciplina = new ArrayList<Curso>();
-	@OneToMany(targetEntity=Disciplina.class, mappedBy="listaDisciplinasCampus", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	private List<Campus> listaCampusDisciplina = new ArrayList<Campus>();
 	
+	@ManyToOne
+	@JoinColumn(name="cursoDisciplina", nullable=false)
+	private Curso cursoDisciplina;
+	
+	@Column
+	private Campus campusDisciplina =  cursoDisciplina.getCampusCurso();
+	
+	@OneToMany(mappedBy="disciplinaTurma", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
 	private List<Turma> listaTurmasDisciplina = new ArrayList<Turma>();
-	@OneToMany(targetEntity=Assunto.class, mappedBy="disciplinaAssunto", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	
+	@OneToMany(mappedBy="disciplinaAssunto", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
 	private List<Assunto> listaAssuntosDisciplina = new ArrayList<Assunto>();
+	
 	private int cargaHorariaDisciplina;
 	private String diaDaSemanaDisciplina;
 	private String horarioDisciplina;
 	
-	public Disciplina(Professor professorDisciplina, List<Curso> listaCursosDisciplina, List<Campus> listaCampusDisciplina,
-			List<Turma> listaTurmasDisciplina, List<Assunto> listaAssuntosDisciplina, int cargaHorariaDisciplina,
+	public Disciplina(Professor professorDisciplina, Curso cursoDisciplina, List<Turma> listaTurmasDisciplina, List<Assunto> listaAssuntosDisciplina, int cargaHorariaDisciplina,
 			String diaDaSemanaDisciplina, String horarioDisciplina) {
 		super();
 		this.professorDisciplina = professorDisciplina;
-		this.listaCursosDisciplina = listaCursosDisciplina;
-		this.listaCampusDisciplina = listaCampusDisciplina;
+		this.cursoDisciplina = cursoDisciplina;
 		this.listaTurmasDisciplina = listaTurmasDisciplina;
 		this.listaAssuntosDisciplina = listaAssuntosDisciplina;
 		this.cargaHorariaDisciplina = cargaHorariaDisciplina;
@@ -51,20 +57,20 @@ public class Disciplina implements Serializable{
 		this.horarioDisciplina = horarioDisciplina;
 	}
 	
-	public Disciplina(List<Curso> listaCursosDisciplina, List<Assunto> listaAssuntosDisciplina,
+	public Disciplina(Curso cursoDisciplina, List<Assunto> listaAssuntosDisciplina,
 			int cargaHorariaDisciplina) {
 		super();
-		this.listaCursosDisciplina = listaCursosDisciplina;
+		this.cursoDisciplina = cursoDisciplina;
 		this.listaAssuntosDisciplina = listaAssuntosDisciplina;
 		this.cargaHorariaDisciplina = cargaHorariaDisciplina;
 	}
 	
-	public List<Campus> getListaCampusDisciplina() {
-		return listaCampusDisciplina;
+	public Campus getListaCampusDisciplina() {
+		return campusDisciplina;
 	}
 
-	public void setListaCampusDisciplina(List<Campus> listaCampusDisciplina) {
-		this.listaCampusDisciplina = listaCampusDisciplina;
+	public void setListaCampusDisciplina(Campus campusDisciplina) {
+		this.campusDisciplina = campusDisciplina;
 	}
 
 	public long getIdDisciplina() {
@@ -99,18 +105,14 @@ public class Disciplina implements Serializable{
 		this.professorDisciplina = professorDisciplina;
 	}
 
-	public List<Curso> getListaCursosDisciplina() {
-		return listaCursosDisciplina;
+	public Curso getCursoDisciplina() {
+		return cursoDisciplina;
 	}
 
-	public void setListaCursosDisciplina(List<Curso> listaCursosDisciplina) {
-		this.listaCursosDisciplina = listaCursosDisciplina;
+	public void setCursoDisciplina(Curso cursoDisciplina) {
+		this.cursoDisciplina = cursoDisciplina;
 	}
 	
-	public void addListaCursosDisciplina(Curso curso) {
-		this.listaCursosDisciplina.add(curso);
-	}
-
 	public List<Turma> getListaTurmasDisciplina() {
 		return listaTurmasDisciplina;
 	}

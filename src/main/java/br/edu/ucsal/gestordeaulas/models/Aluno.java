@@ -1,34 +1,41 @@
 package br.edu.ucsal.gestordeaulas.models;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Aluno extends Usuario {
 	
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3302989573699184657L;
-	@ManyToOne(targetEntity=Curso.class, fetch=FetchType.EAGER)
+	@ManyToOne
+	@JoinColumn(name="cursoAluno", nullable=false) 
 	private Curso cursoAluno;
-	@OneToMany(targetEntity=Turma.class, mappedBy="listaAlunosTurma", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="aluno_turma",
+				joinColumns = @JoinColumn(name = "idUsuario"),
+				inverseJoinColumns = @JoinColumn(name = "idTurma"))
 	private List<Turma> listaTurmasAluno =  new ArrayList<Turma>();
-	@OneToMany(targetEntity=Avaliacao.class, mappedBy="alunoAvaliacao", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	
+	@OneToMany(mappedBy="alunoAvaliacao", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
 	private List<Avaliacao> listaAvaliacoesAluno = new ArrayList<Avaliacao>();
-	@OneToMany(targetEntity=Campus.class, mappedBy="listaAlunosCampus", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	
+	@ManyToMany(mappedBy="listaAlunosCampus", cascade=CascadeType.ALL)
 	private List<Campus> listaCampusAluno = new ArrayList<Campus>();
 	
-	public Aluno(String nome, String sobrenome, String endereco, String cpf, String data,
-			String email, long matricula) {
-		super(nome, sobrenome, endereco, cpf, data, email, matricula);
+	public Aluno(String nome, String sobrenome, String endereco, String cpf, Date data,
+			String email) {
+		super(nome, sobrenome, endereco, cpf, data, email);
 	}
 	
 	public Curso getCurso() {

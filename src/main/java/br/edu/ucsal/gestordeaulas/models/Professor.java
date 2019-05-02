@@ -1,34 +1,44 @@
 package br.edu.ucsal.gestordeaulas.models;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Professor extends Usuario {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -4488262980914326041L;
 	
-	@OneToMany(targetEntity=Disciplina.class, mappedBy="professorDisciplina", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@Column(nullable=true)
+	@OneToMany(mappedBy="professorDisciplina", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
 	private List<Disciplina> listaDisciplinasProfessor = new ArrayList<Disciplina>();
-	@OneToMany(targetEntity=Turma.class, mappedBy="professorTurma", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@Column(nullable=true)
+	
+	@OneToMany(mappedBy="professorTurma", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
 	private List<Turma> listaTurmasProfessor = new ArrayList<Turma>();
-	@OneToMany(targetEntity=Campus.class, mappedBy="listaProfessoresCampus", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	
+	@ManyToMany(mappedBy="listaProfessoresCampus", cascade=CascadeType.ALL)
 	private List<Campus> listaCampusProfessor =  new ArrayList<Campus>();
 	
+	@ManyToMany(mappedBy="listaProfessoresCurso", cascade=CascadeType.ALL)
+	private List<Curso> listaCursosProfessor = new ArrayList<Curso>();
+	
 
-	public Professor(String nome, String sobrenome, String endereco, String cpf, String data,
-			String email, long matricula) {
-		super(nome, sobrenome, endereco, cpf, data, email, matricula);
+	public Professor(String nome, String sobrenome, String endereco, String cpf, Date data,
+			String email) {
+		super(nome, sobrenome, endereco, cpf, data, email);
+	}
+
+	public List<Curso> getListaCursosProfessor() {
+		return listaCursosProfessor;
+	}
+
+	public void setListaCursosProfessor(List<Curso> listaCursosProfessor) {
+		this.listaCursosProfessor = listaCursosProfessor;
 	}
 
 	public List<Disciplina> getListaDisciplinasProfessor() {
